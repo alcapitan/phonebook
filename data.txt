@@ -1,4 +1,4 @@
-Tom/0653412475
-Michel/0696514235
-Jean/0654521474
-alex/0102020202
+name=Tom;mobile=0653412475;end
+name=Michel;mobile=0696514235;end
+name=Jean;mobile=0654521474;end
+name=alex;mobile=0102020202;end

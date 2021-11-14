@@ -1,9 +1,8 @@
 print("Phonebook  - by alcapitan")
-print("Released : 12 Nov 2021")
+print("Released : 13 Nov 2021")
 print()
 
-# Chargement de la database
-
+# Load database
 def loaddata():
     liste=[]
     with open("data.txt","r") as fichier:
@@ -11,17 +10,34 @@ def loaddata():
             ligne=ligne.replace("\n","")
             liste.append(ligne)
         repertoire=[]
+        extract = []
         for element in liste:
-            repertoire+=element.split("/")
+            element = element.lower()
+            extract+=element.split(";")
+            print(extract)
+        dataChecked = 0
+        dataProcess = ""
+        for dataChecked in range(len(extract)):
+        	while dataProcess != "end":
+        		'''repertoire.append("a")
+        		print(repertoire)'''
+        		dataProcess = extract[dataChecked]
+        		print(dataProcess)
+        		print(dataChecked)
+        		print(len(extract))
+        		dataChecked += 1
+        	dataChecked += 1
+        	dataProcess = extract[dataChecked]
+        	print("x")
     return repertoire
-
+loaddata()
 # Boot
 def boot():
     while True:
         choix=menu()
         repertoire=loaddata()
 
-# Menu du répertoire téléphone
+# Menu
 def menu():
 	while True:
 		print("")
@@ -32,6 +48,7 @@ def menu():
 		print("3 - Supprimer un contact")
 		print("4 - Modifier un contact")
 		print("5 - Importer des contacts")
+		print("6 - Paramètres")
 		print("Tout autre touche - Quitter le programme")
         
 		choix=input("Que voulez vous faire : ")
@@ -48,29 +65,35 @@ def menu():
 			return "edit"
 		elif choix == "5":
 			return "import"
+		elif choix == "6":
+			return "settings"
 		else:
 			close()
 
-# Close the program
-def close():
-    print("CLOSE THE PROGRAM")
-    exit()
-    
+# Help
+
+
+# Add a contact
+
+
 # Search a contact
 def search():
     print("SEARCH A CONTACT")
-    request=input("Who are you search : ")
+    request = input("Who are you search : ")
+    request = request.lower()
     repertoire = loaddata()
-    print(repertoire)
     try:
-    	recherche_nom=repertoire.index(request)
+    	request=repertoire.index(request)
+    	if repertoire[request] in repertoire:
+    		print(f"{repertoire[request].capitalize()} : ")
+    		print(f"\tTéléphone : {repertoire[request+1]}")
     except ValueError:
         print("Contact wanted not found")
-    if request in repertoire:
-    	print(f"{request} : {repertoire[recherche_nom+1]}")
+
+# Remove a contact
 
 
-# Fonction pour l'écriture
+# Edit a contact
 def ecriture_repertoire(repertoire):
     print("Ecriture en cours")
     while True:
@@ -92,5 +115,16 @@ def ecriture_repertoire(repertoire):
         with open("data.txt","a")as fichier:   
             fichier.write(nom+"/"+tel+"\n")
             fichier.close()
+
+# Import a contact
+
+
+# Settings
+''' Language, Reset '''
+
+# Close the program
+def close():
+    print("CLOSE THE PROGRAM")
+    exit()
 
 boot() 
